@@ -1,11 +1,17 @@
 import React from 'react'
 import universal from 'react-universal-component'
 
-const UniversalFoo = universal(() => import('./Foo'))
-const UniversalBar = universal(() => import('./Bar'))
+const UniversalFoo = universal(() => import('./Foo'), {
+  loading: <div>Foo is Loading...</div>,
+  minDelay: 1500
+})
+const UniversalBar = universal(() => import('./Bar'), {
+  loading: <div>Bar is Loading...</div>,
+  minDelay: 1500
+})
 
 export default class App extends React.Component {
-  state = { selected: 'Foo' }
+  state = { selected: 'Home' }
 
   render() {
     return (
