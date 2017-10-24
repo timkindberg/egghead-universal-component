@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom'
 import App from './components/App'
 
 const render = App =>
-  // ReactDOM.hydrate(
-  ReactDOM.render(
+  ReactDOM.hydrate(
     <App />,
     document.getElementById('root')
   )
