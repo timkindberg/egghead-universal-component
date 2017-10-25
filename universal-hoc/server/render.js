@@ -4,6 +4,9 @@ import { flushChunkNames } from 'react-universal-component/server'
 import flushChunks from 'webpack-flush-chunks'
 import App from '../src/components/App'
 
+// This gets the clientStats from webpackHotServerMiddleware, you can see a
+// middleware is returned which then sends the html response.
+// For prod you'd pass in the clientStats manually after building with webpack.
 export default ({ clientStats }) => (req, res) => {
   const app = ReactDOM.renderToString(<App />)
   const chunkNames = flushChunkNames()

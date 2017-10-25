@@ -1,38 +1,18 @@
-const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
-const WriteFilePlugin = require('write-file-webpack-plugin')
-
-const res = p => path.resolve(__dirname, p)
-
-const nodeModules = res('../node_modules')
-const entry = res('../server/render.js')
-const output = res('../buildServer')
-
-// if you're specifying externals to leave unbundled, you need to tell Webpack
-// to still bundle `react-universal-component`, `webpack-flush-chunks` and
-// `require-universal-module` so that they know they are running
-// within Webpack and can properly make connections to client modules:
-const externals = fs
-  .readdirSync(nodeModules)
-  .filter(x => !/\.bin|react-universal-component|webpack-flush-chunks/.test(x))
-  .reduce((externals, mod) => {
-    externals[mod] = `commonjs ${mod}`
-    return externals
-  }, {})
-
-externals['react-dom/server'] = 'commonjs react-dom/server'
 
 module.exports = {
+  // REQUIRED: webpackHotServerMiddleware is expecting two webpack configs,
+  // one with a name 'client', one with a name 'server'.
   name: 'server',
+  // Target node for our server config
   target: 'node',
-  // devtool: 'source-map',
-  devtool: 'eval',
-  entry: [entry],
-  externals,
+  // REQUIRED: Entry is set to the render middleware that will receive the clientStats
+  // then flush the chunks and respond with the index.html string content.
+  entry: path.resolve(__dirname, '../server/render.js'),
   output: {
-    path: output,
-    filename: '[name].js',
+    // REQUIRED: Makes sure to expose ../server/render.js middleware on
+    // module.exports so that webpackHotServerMiddleware can call it.
     libraryTarget: 'commonjs2'
   },
   module: {
@@ -45,23 +25,9 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
+        // REQUIRED: server specific version of css-loader
         use: 'css-loader/locals'
       }
     ]
-  },
-  resolve: {
-    extensions: ['.js', '.css']
-  },
-  plugins: [
-    new WriteFilePlugin(),
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1
-    }),
-
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development')
-      }
-    })
-  ]
+  }
 }

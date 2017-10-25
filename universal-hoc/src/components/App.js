@@ -1,6 +1,7 @@
 import React from 'react'
 import universal from 'react-universal-component'
 
+// REQUIRED: Of course, we have to use it!
 const UniversalFoo = universal(() => import('./Foo'), {
   loading: <div>Foo is Loading...</div>,
   minDelay: 1500
