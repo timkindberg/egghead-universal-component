@@ -22,7 +22,6 @@ module.exports = {
   },
   devtool: 'eval',
   entry: [
-    // NEW
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
     'react-hot-loader/patch',
     path.resolve(__dirname, '../src/index.js')
@@ -40,9 +39,7 @@ module.exports = {
       filename: '[name].js',
       minChunks: Infinity
     }),
-    // NEW
     new webpack.HotModuleReplacementPlugin(),
-    // NEW: for babel plugin
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development')

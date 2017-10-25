@@ -1,7 +1,6 @@
 const express = require('express')
 const webpack = require('webpack') // aliased to webpack-universal
 const webpackDevMiddleware = require('webpack-dev-middleware')
-// NEW
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware')
 const clientConfig = require('../webpack/client.dev')
@@ -15,7 +14,6 @@ const publicPath = clientConfig.output.publicPath
 const options = { publicPath, stats: { colors: true } }
 
 app.use(webpackDevMiddleware(compiler, options))
-// NEW
 app.use(webpackHotMiddleware(clientCompiler))
 app.use(webpackHotServerMiddleware(compiler))
 
