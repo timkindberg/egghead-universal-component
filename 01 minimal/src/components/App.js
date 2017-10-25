@@ -4,11 +4,11 @@ import universal from 'react-universal-component'
 // REQUIRED: Of course, we have to use it!
 const UniversalFoo = universal(() => import('./Foo'), {
   loading: <div>Foo is Loading...</div>,
-  minDelay: 1500
+  minDelay: 500
 })
 const UniversalBar = universal(() => import('./Bar'), {
   loading: <div>Bar is Loading...</div>,
-  minDelay: 1500
+  minDelay: 500
 })
 
 export default class App extends React.Component {

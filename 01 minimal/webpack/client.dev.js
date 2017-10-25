@@ -45,7 +45,5 @@ module.exports = {
       filename: '[name].js',
       minChunks: Infinity
     }),
-
-    // new webpack.HotModuleReplacementPlugin(),
   ]
 }

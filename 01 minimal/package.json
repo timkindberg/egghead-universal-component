@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "npm run clean && cross-env NODE_ENV=development node server/index.js",
+    "prestart": "npm run clean",
+    "start": "cross-env NODE_ENV=development node server/index.js",
     "clean": "rimraf buildClient buildServer"
   },
   "dependencies": {
@@ -28,7 +29,6 @@
     "extract-css-chunks-webpack-plugin": "^2.0.17",
     "rimraf": "^2.6.2",
     "webpack-dev-middleware": "^1.12.0",
-    "webpack-hot-middleware": "^2.20.0",
     "write-file-webpack-plugin": "^4.2.0"
   }
 }
