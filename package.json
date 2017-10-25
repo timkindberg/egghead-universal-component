@@ -1,0 +1,15 @@
+{
+  "name": "egghead-universal",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "01_minimal",
+    "02_add_hmr",
+    "03_universal_hoc"
+  ],
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start1": "FOLDER=`ls -a | grep 01` && cd $FOLDER && cross-env NODE_ENV=development node server/index.js"
+  }
+}

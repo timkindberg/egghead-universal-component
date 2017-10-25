@@ -17,7 +17,7 @@ export default class App extends React.Component {
     return (
       <div>
         { this.state.selected === 'Home' &&
-          <div>asdf</div> }
+          <div>Home</div> }
         { this.state.selected === 'Foo' &&
           <UniversalFoo /> }
         { this.state.selected === 'Bar' &&

@@ -1,12 +1,10 @@
 {
-  "name": "universal-hoc",
+  "name": "03_universal_hoc",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prestart": "npm run clean",
-    "start": "cross-env NODE_ENV=development node server/index.js",
-    "clean": "rimraf buildClient buildServer"
+    "start": "cross-env NODE_ENV=development node server/index.js"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
