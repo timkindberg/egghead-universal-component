@@ -10,6 +10,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start1": "FOLDER=`ls -a | grep 01` && cd $FOLDER && cross-env NODE_ENV=development node server/index.js"
+    "start": "cross-env NODE_ENV=development node server/index.js",
+    "start1": "cd $(ls -a | grep 01) && npm start",
+    "start2": "cd $(ls -a | grep 02) && npm start",
+    "start3": "cd $(ls -a | grep 03) && npm start"
   }
 }
