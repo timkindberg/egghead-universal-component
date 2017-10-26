@@ -1,14 +1,9 @@
 import React from 'react'
 import universal from 'react-universal-component'
 
-const UniversalFoo = universal(() => import('./Foo'), {
-  loading: <div>Foo is Loading...</div>,
-  minDelay: 1500
-})
-const UniversalBar = universal(() => import('./Bar'), {
-  loading: <div>Bar is Loading...</div>,
-  minDelay: 1500
-})
+const HomeTab = () => <div>Home</div>;
+const FooTab = universal(() => import('./Foo'))
+const BarTab = universal(() => import('./Bar'))
 
 export default class App extends React.Component {
   state = { selected: 'Home' }
@@ -17,11 +12,11 @@ export default class App extends React.Component {
     return (
       <div>
         { this.state.selected === 'Home' &&
-          <div>Home</div> }
+          <HomeTab /> }
         { this.state.selected === 'Foo' &&
-          <UniversalFoo /> }
+          <FooTab /> }
         { this.state.selected === 'Bar' &&
-          <UniversalBar /> }
+          <BarTab /> }
 
         <button onClick={ () => this.setState({ selected: 'Home' }) }>
           Home
