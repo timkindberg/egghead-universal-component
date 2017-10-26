@@ -21,5 +21,16 @@ module.exports = {
         use: 'css-loader/locals'
       }
     ]
-  }
+  },
+  plugins: [
+    // REQUIRED: To make dynamic css work correctly
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development')
+      }
+    })
+  ]
 }
