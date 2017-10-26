@@ -1,5 +1,9 @@
 import React from 'react'
 
+const HomeTab = () => <div>Home</div>;
+const FooTab = () => <div>Foo</div>;
+const BarTab = () => <div>Bar</div>;
+
 export default class App extends React.Component {
   state = { selected: 'Home' }
 
@@ -7,11 +11,11 @@ export default class App extends React.Component {
     return (
       <div>
         { this.state.selected === 'Home' &&
-          <div>Home</div> }
+          <HomeTab /> }
         { this.state.selected === 'Foo' &&
-          <div>Foo</div> }
+          <FooTab /> }
         { this.state.selected === 'Bar' &&
-          <div>Bar</div> }
+          <BarTab /> }
 
         <button onClick={ () => this.setState({ selected: 'Home' }) }>
           Home
