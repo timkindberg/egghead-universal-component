@@ -6,7 +6,8 @@
     "01_minimal",
     "02_add_hmr",
     "03_universal_hoc",
-    "04_dynamic_load"
+    "04_dynamic_load",
+    "05_custom_loader"
   ],
   "main": "index.js",
   "license": "MIT",
