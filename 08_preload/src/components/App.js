@@ -1,19 +1,16 @@
 import React from 'react'
 import universal from 'react-universal-component'
 import Loading from './Loading'
-import NotFound from './NotFound'
 import './App.css'
 
 const LazyTab = universal(({ tab }) => import(`./${tab}`), {
   minDelay: 500,
   alwaysDelay: true,
-  loadingTransition: false,
-  // Show this last
-  error: NotFound
+  loadingTransition: false
 })
 
 export default class App extends React.Component {
-  state = { selected: 'Baz', loading: false, error: false }
+  state = { selected: 'Home', loading: false, error: false }
 
   loadStart = () => {
     this.setState({ loading: true, error: false })
@@ -38,23 +35,24 @@ export default class App extends React.Component {
             onBefore={ this.loadStart }
             onAfter={ this.loadEnd }
             onError={ this.loadError }
-            error={ this.state.error || this.state.forcedError }
+            error={ this.state.error }
           />
         </div>
 
-        { ['Baz', 'Home', 'Foo', 'Bar'].map((tab, i) =>
+        { ['Home', 'Foo', 'Bar'].map((tab, i) =>
           <button
             key={ i }
             onClick={ () => this.setState({ selected: tab }) }
+            onMouseEnter={ () => LazyTab.preload({ tab }) }
           >
             { tab }
           </button>) }
-          <button onClick={ () => this.setState({
-              forcedError: !this.state.forcedError
-                ? new Error('oh no')
-                : null
-          })}>
-            Force Error
+
+          <button onClick={ () => LazyTab.preload({ tab: 'Foo' }) }>
+            Preload Foo
+          </button>
+          <button onClick={ () => LazyTab.preload({ tab: 'Bar' }) }>
+            Preload Bar
           </button>
       </div>
     )
