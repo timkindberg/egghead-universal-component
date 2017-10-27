@@ -15,7 +15,10 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <LazyTab tab={ this.state.selected } />
+        <LazyTab
+          tab={ this.state.selected }
+          isLoading={ this.state.forcedLoading }
+        />
 
         { ['Home', 'Foo', 'Bar'].map((tab, i) =>
           <button
@@ -24,6 +27,14 @@ export default class App extends React.Component {
           >
             { tab }
           </button>) }
+
+          <button onClick={
+            () => this.setState({
+              forcedLoading: !this.state.forcedLoading
+            })
+          }>
+            Force Loading
+          </button>
       </div>
     )
   }
