@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "01_minimal",
+    "01_minimum_required_config",
     "02_add_hmr",
     "03_universal_hoc",
     "04_dynamic_load",
