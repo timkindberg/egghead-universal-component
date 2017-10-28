@@ -10,7 +10,8 @@
     "05_custom_loader",
     "06_loading_animation",
     "07_loading_errors",
-    "08_preload"
+    "08_preload",
+    "09_load_named_export"
   ],
   "main": "index.js",
   "license": "MIT",
@@ -23,6 +24,7 @@
     "start5": "cd $(ls -a | grep 05) && npm start",
     "start6": "cd $(ls -a | grep 06) && npm start",
     "start7": "cd $(ls -a | grep 07) && npm start",
-    "start8": "cd $(ls -a | grep 08) && npm start"
+    "start8": "cd $(ls -a | grep 08) && npm start",
+    "start9": "cd $(ls -a | grep 09) && npm start"
   }
 }
