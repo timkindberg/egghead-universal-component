@@ -15,4 +15,4 @@ export default (state=initialState, action) => {
 }
 
 export const getSelectedTab =
-  (state) => state.selectedTab
+  (state) => state.tabs.selectedTab

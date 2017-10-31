@@ -4,6 +4,7 @@ const webpack = require('webpack')
 module.exports = {
   name: 'server',
   target: 'node',
+  devtool: 'source-map',
   entry: path.resolve(__dirname, '../server/render.js'),
   output: {
     libraryTarget: 'commonjs2'

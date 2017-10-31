@@ -9,7 +9,12 @@ import './App.css'
 const LazyTab = universal(({ tab }) => import(`./${tab}`), {
   minDelay: 500,
   alwaysDelay: true,
-  loadingTransition: false
+  loadingTransition: false,
+  onLoad(module, info, props, context) {
+    if (module.reducers) {
+      context.store.injectReducers(module.reducers)
+    }
+  }
 })
 
 class App extends React.Component {

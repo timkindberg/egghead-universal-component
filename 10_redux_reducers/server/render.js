@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/server'
 import { flushChunkNames } from 'react-universal-component/server'
+import { Provider } from 'react-redux'
 import flushChunks from 'webpack-flush-chunks'
 import App from '../src/components/App'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import tabs from '../src/reducers/tabs'
+import configureStore from '../src/configureStore'
 
-const store = createStore(tabs)
+const store = configureStore()
 
 export default ({ clientStats }) => (req, res) => {
   const initialState = JSON.stringify(store.getState());
