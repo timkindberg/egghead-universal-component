@@ -3,9 +3,19 @@ import ReactDOM from 'react-dom/server'
 import { flushChunkNames } from 'react-universal-component/server'
 import flushChunks from 'webpack-flush-chunks'
 import App from '../src/components/App'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import tabs from '../src/reducers/tabs'
+
+const store = createStore(tabs)
 
 export default ({ clientStats }) => (req, res) => {
-  const app = ReactDOM.renderToString(<App />)
+  const initialState = JSON.stringify(store.getState());
+  const app = ReactDOM.renderToString(
+    <Provider store={ store }>
+      <App />
+    </Provider>
+  )
   const chunkNames = flushChunkNames()
 
   const {
@@ -30,6 +40,9 @@ export default ({ clientStats }) => (req, res) => {
           ${styles}
         </head>
         <body>
+          <script>
+            window.__INITIAL_STATE__ = ${initialState}
+          </script>
           <div id="root">${app}</div>
           ${cssHash}
           ${js}

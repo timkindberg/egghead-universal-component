@@ -2,9 +2,9 @@ import React from 'react'
 import universal from 'react-universal-component'
 import { connect } from 'react-redux'
 import Loading from './Loading'
-import './App.css'
-import { selectTab } from '../actions/selectTab'
+import { selectTab } from '../actions/tabs'
 import { getSelectedTab } from '../reducers/tabs'
+import './App.css'
 
 const LazyTab = universal(({ tab }) => import(`./${tab}`), {
   minDelay: 500,

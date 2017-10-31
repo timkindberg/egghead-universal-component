@@ -4,11 +4,9 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import AppContainer from 'react-hot-loader/lib/AppContainer'
 import App from './components/App'
-import tabs from './reducers/tabs'
+import reducers from './reducers/tabs'
 
-const store = createStore(tabs)
-
-console.log(store);
+const store = createStore(reducers)
 
 const render = App => ReactDOM.hydrate(
   <Provider store={ store }>
