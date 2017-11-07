@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const WriteFilePlugin = require('write-file-webpack-plugin')
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin')
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
       }
     ]
   },
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
     'react-hot-loader/patch',
@@ -33,6 +34,7 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    new WriteFilePlugin(),
     new ExtractCssChunks(),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['bootstrap'],
