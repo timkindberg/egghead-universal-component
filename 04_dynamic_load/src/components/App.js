@@ -1,8 +1,7 @@
 import React from 'react'
 import universal from 'react-universal-component'
 
-// NEW
-const LazyTab = universal(({ tab }) => import(`./${tab}`))
+const UniversalTab = universal(({ tab }) => import(`./${tab}`))
 
 export default class App extends React.Component {
   state = { selected: 'Home' }
@@ -10,7 +9,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <LazyTab tab={ this.state.selected } />
+        <UniversalTab tab={ this.state.selected } />
 
         { ['Home', 'Foo', 'Bar'].map((tab, i) =>
           <button
