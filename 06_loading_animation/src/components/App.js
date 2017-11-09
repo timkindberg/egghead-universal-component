@@ -3,43 +3,34 @@ import universal from 'react-universal-component'
 import Loading from './Loading'
 import './App.css'
 
-// NEW
-const LazyTab = universal(({ tab }) => import(`./${tab}`), {
+const UniversalTab = universal(({ tab }) => import(`./${tab}`), {
   minDelay: 500,
   alwaysDelay: true,
   loadingTransition: false
 })
 
 export default class App extends React.Component {
-  state = { selected: 'Home', loading: false }
-
-  loadStart = () => {
-    this.setState({ loading: true })
-  }
-
-  loadEnd = () => {
-    this.setState({ loading: false })
-  }
+  state = { selected: 'Home' }
 
   render() {
     return (
       <div>
-        { this.state.loading && <Loading /> }
-        <div className={ this.state.loading ? 'loading' : '' }>
-          <LazyTab
-            tab={ this.state.selected }
-            onBefore={ this.loadStart }
-            onAfter={ this.loadEnd }
-          />
-        </div>
+        <UniversalTab
+          tab={ this.state.selected }
+        />
 
-        { ['Home', 'Foo', 'Bar'].map((tab, i) =>
-          <button
-            key={ i }
-            onClick={ () => this.setState({ selected: tab }) }
-          >
-            { tab }
-          </button>) }
+        <button onClick={ () =>
+            this.setState({ selected: 'Home' }) }>
+          Home
+        </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Foo' }) }>
+          Foo
+        </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Bar' }) }>
+          Bar
+        </button>
       </div>
     )
   }

@@ -2,11 +2,10 @@ import React from 'react'
 import universal from 'react-universal-component'
 import Loading from './Loading'
 
-// NEW
-const LazyTab = universal(({ tab }) => import(`./${tab}`), {
-  loading: <Loading />,
-  minDelay: 1000,
-  loadingTransition: true
+const UniversalTab = universal(({ tab }) => import(`./${tab}`), {
+  minDelay: 750,
+  loading: Loading,
+  loadingTransition: false
 })
 
 export default class App extends React.Component {
@@ -15,26 +14,23 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <LazyTab
+        <UniversalTab
           tab={ this.state.selected }
-          isLoading={ this.state.forcedLoading }
-        />
+          isLoading={ true }
+          />
 
-        { ['Home', 'Foo', 'Bar'].map((tab, i) =>
-          <button
-            key={ i }
-            onClick={ () => this.setState({ selected: tab }) }
-          >
-            { tab }
-          </button>) }
-
-          <button onClick={
-            () => this.setState({
-              forcedLoading: !this.state.forcedLoading
-            })
-          }>
-            Force Loading
-          </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Home' }) }>
+          Home
+        </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Foo' }) }>
+          Foo
+        </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Bar' }) }>
+          Bar
+        </button>
       </div>
     )
   }
