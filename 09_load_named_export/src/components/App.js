@@ -1,11 +1,11 @@
 import React from 'react'
+import HomeTab from './Home'
 import universal from 'react-universal-component'
 
-const HomeTab = () => <div>Home</div>;
-const FooTab = universal(() => import('./Foo'), {
+const FooTab = universal(import('./Foo'), {
   key: 'Foo'
 })
-const BarTab = universal(() => import('./Bar'), {
+const BarTab = universal(import('./Bar'), {
   key: (module) => module.Bar
 })
 
