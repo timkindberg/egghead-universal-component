@@ -1,64 +1,31 @@
 import React from 'react'
 import universal from 'react-universal-component'
-import Loading from './Loading'
-import './App.css'
 
-const LazyTab = universal(({ tab }) => import(`./${tab}`), {
-  minDelay: 500,
-  alwaysDelay: true,
-  loadingTransition: false
-})
+const UniversalTab = universal(({ tab }) => import(`./${tab}`))
 
 export default class App extends React.Component {
-  state = { selected: 'Home', loading: false, error: false }
-
-  componentDidMount() {
-    LazyTab.preload({ tab: 'Foo' })
-    LazyTab.preload({ tab: 'Bar' })
-  }
-
-  loadStart = () => {
-    this.setState({ loading: true, error: false })
-  }
-
-  loadEnd = () => {
-    this.setState({ loading: false })
-  }
-
-  loadError = (error) => {
-    this.setState({ error })
-    console.log(error)
-  }
+  state = { selected: 'Home' }
 
   render() {
     return (
       <div>
-        { this.state.loading && <Loading /> }
-        <div className={ this.state.loading ? 'loading' : '' }>
-          <LazyTab
-            tab={ this.state.selected }
-            onBefore={ this.loadStart }
-            onAfter={ this.loadEnd }
-            onError={ this.loadError }
-            error={ this.state.error }
-          />
-        </div>
+        <UniversalTab tab={ this.state.selected } />
 
-        { ['Home', 'Foo', 'Bar'].map((tab, i) =>
-          <button
-            key={ i }
-            onClick={ () => this.setState({ selected: tab }) }
-            onMouseEnter={ () => LazyTab.preload({ tab }) }
-          >
-            { tab }
-          </button>) }
-
-          <button onClick={ () => LazyTab.preload({ tab: 'Foo' }) }>
-            Preload Foo
-          </button>
-          <button onClick={ () => LazyTab.preload({ tab: 'Bar' }) }>
-            Preload Bar
-          </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Home' }) }>
+          Home
+        </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Foo' }) }
+                onMouseEnter={ () =>
+            UniversalTab.preload({ tab: 'Foo' })    }
+            >
+          Foo
+        </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Bar' }) }>
+          Bar
+        </button>
       </div>
     )
   }

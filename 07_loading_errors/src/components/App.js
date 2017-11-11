@@ -4,58 +4,31 @@ import Loading from './Loading'
 import NotFound from './NotFound'
 import './App.css'
 
-const LazyTab = universal(({ tab }) => import(`./${tab}`), {
-  minDelay: 500,
-  alwaysDelay: true,
-  loadingTransition: false,
-  // Show this last
+const UniversalTab = universal(({ tab }) => import(`./${tab}`), {
   error: NotFound
 })
 
 export default class App extends React.Component {
-  state = { selected: 'Baz', loading: false, error: false }
-
-  loadStart = () => {
-    this.setState({ loading: true, error: false })
-  }
-
-  loadEnd = () => {
-    this.setState({ loading: false })
-  }
-
-  loadError = (error) => {
-    this.setState({ error })
-    console.log(error)
-  }
+  state = {}
 
   render() {
     return (
       <div>
-        { this.state.loading && <Loading /> }
-        <div className={ this.state.loading ? 'loading' : '' }>
-          <LazyTab
+        { this.state.selected &&
+          <UniversalTab
             tab={ this.state.selected }
-            onBefore={ this.loadStart }
-            onAfter={ this.loadEnd }
-            onError={ this.loadError }
-            error={ this.state.error || this.state.forcedError }
+            onError={ (error) => console.log(error) }
           />
-        </div>
+        }
 
-        { ['Baz', 'Home', 'Foo', 'Bar'].map((tab, i) =>
-          <button
-            key={ i }
-            onClick={ () => this.setState({ selected: tab }) }
-          >
-            { tab }
-          </button>) }
-          <button onClick={ () => this.setState({
-              forcedError: !this.state.forcedError
-                ? new Error('oh no')
-                : null
-          })}>
-            Force Error
-          </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Home' }) }>
+          Home
+        </button>
+        <button onClick={ () =>
+            this.setState({ selected: 'Broken' }) }>
+          Broken
+        </button>
       </div>
     )
   }
