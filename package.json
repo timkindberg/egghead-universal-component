@@ -1,5 +1,6 @@
 {
   "name": "egghead-universal",
+  "author": "Tim Kindberg <timkindberg@gmail.com>",
   "version": "1.0.0",
   "private": true,
   "workspaces": [

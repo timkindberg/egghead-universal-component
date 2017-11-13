@@ -5,7 +5,10 @@ const FooTab = () => <div>Foo</div>;
 const BarTab = () => <div>Bar</div>;
 
 export default class App extends React.Component {
-  state = { selected: 'Home' }
+  constructor(props) {
+    super(props)
+    this.state = { selected: 'Home' }
+  }
 
   render() {
     return (
