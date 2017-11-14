@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
 import AppContainer from 'react-hot-loader/lib/AppContainer'
 import App from './components/App'
 import configureStore from './configureStore'

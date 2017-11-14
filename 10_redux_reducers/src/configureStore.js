@@ -1,22 +1,17 @@
 import { createStore } from 'redux'
-import createReducer from './reducers/index'
+import reducer from './reducers/index'
 
 const configureStore = (initialState) => {
-  const store = createStore(createReducer(), initialState);
-
-  store.injectReducers = (asyncReducers) =>
-    store.replaceReducer(
-      createReducer(asyncReducers)
-    )
+  const store = createStore(reducer, initialState)
 
   if (module.hot) {
     module.hot.accept(
       './reducers',
-      () => store.replaceReducer(reducers)
-    );
+      () => store.replaceReducer(require('./reducers').default)
+    )
   }
 
   return store;
 }
 
-export default configureStore;
+export default configureStore
