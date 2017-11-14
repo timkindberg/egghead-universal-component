@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.css'
 
 const HomeTab = () => <div>Home</div>;
 const FooTab = () => <div>Foo</div>;

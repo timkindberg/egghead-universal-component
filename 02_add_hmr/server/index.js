@@ -1,5 +1,5 @@
 const express = require('express')
-const webpack = require('webpack') // aliased to webpack-universal
+const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 // NEW
 const webpackHotMiddleware = require('webpack-hot-middleware')
