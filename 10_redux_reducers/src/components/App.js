@@ -4,7 +4,13 @@ import { connect } from 'react-redux'
 import { selectTab } from '../actions/tabs'
 import { getSelectedTab } from '../reducers/tabs'
 
-const UniversalTab = universal(({ tab }) => import(`./${tab}`))
+const UniversalTab = universal(({ tab }) => import(`./${tab}`), {
+  onLoad(module, info, props, context) {
+    if (module.reducers) {
+      context.store.injectReducers(module.reducers)
+    }
+  }
+})
 
 class App extends React.Component {
   render() {

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import tabs from './tabs'
 
-export default combineReducers({
-  tabs
+export default (asyncReducers) => combineReducers({
+  tabs,
+  ...asyncReducers
 })

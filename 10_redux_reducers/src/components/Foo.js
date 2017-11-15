@@ -4,7 +4,7 @@ import { setIndex } from '../actions/foo'
 import foo, { getIndex } from '../reducers/foo'
 import './Foo.css'
 
-export const reducers = { foo };
+export const reducers = { foo }
 
 const Foo = ({ index, setIndex }) =>
   <div className='Foo'>

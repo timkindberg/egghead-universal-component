@@ -1,8 +1,13 @@
 import { createStore } from 'redux'
-import reducer from './reducers/index'
+import createReducer from './reducers/index'
 
 const configureStore = (initialState) => {
-  const store = createStore(reducer, initialState)
+  const store = createStore(createReducer(), initialState)
+
+  store.injectReducers = (asyncReducers) => 
+    store.replaceReducer(
+      createReducer(asyncReducers)
+    )
 
   if (module.hot) {
     module.hot.accept(
